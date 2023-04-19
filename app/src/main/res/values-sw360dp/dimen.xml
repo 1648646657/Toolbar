@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dp_1">1.00000dp</dimen>
+    <dimen name="dp_2">2.00000dp</dimen>
+    <dimen name="dp_3">3.00000dp</dimen>
+
+    <!--中间太多 省略-->
+    <dimen name="dp_108">108.00000dp</dimen>
+
+    <dimen name="dp_358">358.00000dp</dimen>
+    <dimen name="dp_359">359.00000dp</dimen>
+    <dimen name="dp_360">360.00000dp</dimen>
+
+</resources>

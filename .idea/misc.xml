@@ -1,0 +1,33 @@
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1975" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout-1024x640/activity_main.xml" value="0.11503623188405797" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_app_test.xml" value="0.10764944275582573" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_camera.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_drag_and_drop.xml" value="0.22" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_encode_decode.xml" value="0.2682291666666667" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_main2.xml" value="0.22760416666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_tcp_connect.xml" value="0.16875" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_tween.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_udp_connect.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_value.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/activity_xml_parser.xml" value="0.2078125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/child.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/gallery_imageview.xml" value="0.20625" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/layout/nav_header.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/menu/menu.xml" value="0.27239583333333334" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/menu/nav_menu.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Toolbar/app/src/main/res/menu/toolbar.xml" value="0.246875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

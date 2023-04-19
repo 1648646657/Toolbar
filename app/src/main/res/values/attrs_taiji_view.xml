@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TaiJiView">
+        <attr name="leftcolor" format="reference|color"/>
+        <attr name="rightcolor" format="reference|color"/>
+        <attr name="animaltime" format="integer"/>
+    </declare-styleable>
+</resources>

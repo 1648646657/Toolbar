@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mediaCodec.EncodeDecodeActivity">
+    <SurfaceView
+        android:id="@+id/video_surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+    <Button
+        android:id="@+id/video_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="播放"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+         />
+    <Button
+        android:id="@+id/video_button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重播"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/video_button"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.toolbar">
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+<!--    activityListen-->
+    <uses-permission xmlns:tools="http://schemas.android.com/tools"
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+<!--    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"-->
+<!--        tools:ignore="ProtectedPermissions" />-->
+<!--    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>-->
+
+    <uses-feature android:name="android.hardware.camera2.full" />
+
+    <queries>
+        <package android:name="com.example.mallproject" />
+        <!-- 也可以单独指定provider -->
+        <!-- <provider android:authorities="com.example.mallproject.provider" /> -->
+    </queries>
+
+    <application
+        android:allowBackup="true"
+
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Toolbar"
+        tools:targetApi="31">
+        <activity
+            android:name=".XmlSaxParser.XmlParserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".udp.UdpConnectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tcp.TcpConnectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mediaCodec.EncodeDecodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppTest"
+            android:exported="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".camera.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DragAndDropActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ValueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TweenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="toolbar">
+<!--            android:theme="@android:style/Theme.NoDisplay">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+<!--                <data android:host="MainActivity"-->
+<!--                    android:scheme="com.csu" />-->
+            </intent-filter>
+        </activity>
+        <service android:name=".ActivityListenSevice"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+    </application>
+
+</manifest>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SuperCircleView">
+        <attr name="exampleString" format="string"/>
+        <attr name="exampleDimension" format="dimension"/>
+        <attr name="exampleColor" format="color"/>
+        <attr name="exampleDrawable" format="color|reference"/>
+
+        <attr name="min_circle_radio" format="integer"/>
+        <attr name="ring_width" format="float"/>
+        <attr name="circle_color" format="color"/>
+        <attr name="max_circle_color" format="color"/>
+        <attr name="ring_normal_color" format="color"/>
+        <attr name="ring_color_select" format="integer"/>
+        
+        <attr name="maxValue" format="integer"/>
+        <attr name="value" format="integer"/>
+        <attr name="ring_radius" format="float"/>
+
+    </declare-styleable>
+</resources>

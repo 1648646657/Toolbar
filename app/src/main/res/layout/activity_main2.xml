@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity2">
+<!--    <com.example.toolbar.CustomView.MyView-->
+<!--        android:id="@+id/myview2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+    <TextView
+        android:id="@+id/tv_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义View"
+        android:textSize="30sp" />
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center">
+        <com.example.toolbar.CustomView.SuperCircleView
+            android:id="@+id/superview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:maxValue="100"
+            app:ring_width="60"
+            app:value="20" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            android:text="信息完成度"
+            android:textColor="#506946"
+            android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#506946"
+                android:textSize="75sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textSize="28sp" />
+        </LinearLayout>
+    </FrameLayout>
+    <com.example.toolbar.CustomView.TaiJiView
+        android:id="@+id/taiji_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:leftcolor="@color/black"
+        app:rightcolor="@color/white"
+        app:animaltime="2000"/>
+
+</LinearLayout>
