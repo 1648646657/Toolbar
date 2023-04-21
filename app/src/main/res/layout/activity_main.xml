@@ -27,13 +27,13 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.example.toolbar.CustomView.MyConstraintLayout
+        <com.lzx.test.CustomView.MyConstraintLayout
             android:id="@+id/myLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"/>
 
-        <com.example.toolbar.CustomView.MyView
+        <com.lzx.test.CustomView.MyView
             android:id="@+id/myview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
