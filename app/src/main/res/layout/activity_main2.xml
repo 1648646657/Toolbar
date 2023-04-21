@@ -21,7 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center">
-        <com.example.toolbar.CustomView.SuperCircleView
+        <com.lzx.test.CustomView.SuperCircleView
             android:id="@+id/superview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textSize="28sp" />
         </LinearLayout>
     </FrameLayout>
-    <com.example.toolbar.CustomView.TaiJiView
+    <com.lzx.test.CustomView.TaiJiView
         android:id="@+id/taiji_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.toolbar">
+    package="com.lzx.test">
     <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
 
 <!--    activityListen-->
     <uses-permission xmlns:tools="http://schemas.android.com/tools"
@@ -21,7 +22,7 @@
     <uses-feature android:name="android.hardware.camera2.full" />
 
     <queries>
-        <package android:name="com.example.mallproject" />
+        <package android:name="com.lzx.mallproject" />
         <!-- 也可以单独指定provider -->
         <!-- <provider android:authorities="com.example.mallproject.provider" /> -->
     </queries>
