@@ -32,7 +32,12 @@ android {
     dataBinding{
         enabled = true;
     }
+    namespace 'com.lzx.test'
 
+    packagingOptions {
+        exclude'META-INF/INDEX.LIST'
+        exclude'META-INF/io.netty.versions.properties'
+    }
 }
 
 dependencies {
@@ -45,4 +50,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
+    // https://mvnrepository.com/artifact/io.netty/netty-all
+    implementation group: 'io.netty', name: 'netty-all', version: '4.1.91.Final'
+
 }

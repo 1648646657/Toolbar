@@ -5,4 +5,18 @@
         <attr name="textSize" format="dimension|reference"/>
         <attr name="text" format="string|reference"/>
     </declare-styleable>
+
+    <string-array name="messages">
+        <item>SET IN1 VIDEO OUT5</item>
+        <item>SET IN1 VIDEO OUT6</item>
+        <item>SET IN1 VIDEO OUT7</item>
+        <item>SET IN2 VIDEO OUT1</item>
+        <item>SET IN3 VIDEO OUT1</item>
+        <item>SET IN4 VIDEO OUT1</item>
+        <item>SET IN1 VIDEO ALL</item>
+        <item>GET IN1 IN-SIGNAL</item>
+        <item>GET IN2 IN-SIGNAL</item>
+        <item>GET IN3 IN-SIGNAL</item>
+    </string-array>
+
 </resources>

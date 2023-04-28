@@ -15,7 +15,7 @@ import java.net.Socket;
 public class TcpServerThread extends Thread{
 
     private boolean isSend;
-    private boolean isOpen;
+    public boolean isOpen;
     private String msg;
     private Handler mHandler;
     private ServerSocket serverSocket;
@@ -106,7 +106,22 @@ public class TcpServerThread extends Thread{
         }
 
     }
-    
+
+    public boolean isSend() {
+        return isSend;
+    }
+
+    public void setSend(boolean send) {
+        isSend = send;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
 
     private void sendMsg(int what, Object object){
         Message msg = new Message();

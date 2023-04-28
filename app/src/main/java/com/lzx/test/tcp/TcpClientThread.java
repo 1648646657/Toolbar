@@ -46,15 +46,15 @@ public class TcpClientThread extends Thread{
         InputStreamReader reader = null;
         BufferedReader bufReader = null;
 //        Socket socket = null;
-
         try {
             if(isSend){
                 Socket socket = new Socket(address,port);
                 //客户端发送数据
                 OutputStream outputStream = socket.getOutputStream();
-                outputStream.write(("我是客户端，我给服务端发送的数据是："+msg).getBytes());
+                outputStream.write(msg.getBytes());
                 outputStream.flush();
                 socket.shutdownOutput();
+                Log.d("lzx", "sendSocket: ");
             }
             while (isOpen){
                 Socket socket = new Socket(address,port);
@@ -68,6 +68,8 @@ public class TcpClientThread extends Thread{
                     sb.append(s);
                 }
                 sendMsg(0, sb.toString());
+                socket.shutdownInput();
+                Log.d("lzx", "TcpClientThread.sendSocket: ");
             }
         }catch (UnknownHostException e){
             e.printStackTrace();
@@ -88,6 +90,22 @@ public class TcpClientThread extends Thread{
 //            }
         }
 
+    }
+
+    public boolean isSend() {
+        return isSend;
+    }
+
+    public void setSend(boolean send) {
+        isSend = send;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 
     private void sendMsg(int what, Object object){

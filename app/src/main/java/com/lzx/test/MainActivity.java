@@ -24,6 +24,8 @@ import com.lzx.test.CustomView.MyView;
 import com.lzx.test.MainActivity2;
 import com.lzx.test.http.OkHttp;
 import com.google.android.material.navigation.NavigationView;
+import com.lzx.test.netty.NettyActivity;
+import com.lzx.test.tcp.TcpConnectActivity;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.delete:
 //                Toast.makeText(this,"Clicked UDP",Toast.LENGTH_SHORT).show();
-                Intent intent1=new Intent(this, MainActivity2.class);
+                Intent intent1=new Intent(this, NettyActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.settings:
