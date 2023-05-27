@@ -1,4 +1,4 @@
-package com.lzx.toolbar.camera;
+package com.lzx.test.camera;
 
 import android.content.Context;
 //import android.graphics.Camera;

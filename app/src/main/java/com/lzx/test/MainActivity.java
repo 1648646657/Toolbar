@@ -18,14 +18,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lzx.test.ActivityListenSevice;
 import com.lzx.test.CustomView.MyConstraintLayout;
 import com.lzx.test.CustomView.MyView;
-import com.lzx.test.MainActivity2;
+import com.lzx.test.calendar.CalendarActivity;
 import com.lzx.test.http.OkHttp;
 import com.google.android.material.navigation.NavigationView;
-import com.lzx.test.netty.NettyActivity;
-import com.lzx.test.tcp.TcpConnectActivity;
+import com.lzx.test.netty.TcpServerActivity;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -121,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("lzx", "onResume: 手机厂商: "+Build.BRAND);
+        Log.d("lzx", "onResume: SDK版本: "+Build.VERSION.SDK_INT);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
@@ -156,12 +161,14 @@ public class MainActivity extends AppCompatActivity {
 //                Intent intent=new Intent(this, CameraActivity.class);
 //                startActivity(intent);
 //                overridePendingTransition(R.anim.scale,0);
+                Intent intent=new Intent(this, CalendarActivity.class);
+                startActivity(intent);
                 Toast.makeText(this,"Clicked Backup",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete:
-//                Toast.makeText(this,"Clicked UDP",Toast.LENGTH_SHORT).show();
-                Intent intent1=new Intent(this, NettyActivity.class);
+                Intent intent1=new Intent(this, AppTest.class);
                 startActivity(intent1);
+                Toast.makeText(this,"Clicked Delete",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.settings:
                 Toast.makeText(this,"Clicked Settings",Toast.LENGTH_SHORT).show();

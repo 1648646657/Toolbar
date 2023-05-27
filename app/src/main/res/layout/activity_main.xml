@@ -40,12 +40,11 @@
             android:layout_marginTop="?attr/actionBarSize"
             app:text="自定义View"
             app:textColor="@color/green"
-            app:textSize="40sp" />
+            android:visibility="gone"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/text_view"
                 android:layout_width="match_parent"

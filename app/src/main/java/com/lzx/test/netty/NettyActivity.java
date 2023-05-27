@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +17,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lzx.test.R;
+import com.lzx.test.netty.client.ConnectClient;
+import com.lzx.test.netty.client.MessageListAdapter;
+import com.lzx.test.netty.client.MsgItem;
+import com.lzx.test.netty.client.TcpClient;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -129,6 +132,7 @@ public class NettyActivity extends AppCompatActivity implements View.OnClickList
             case R.id.bt_clean:
                 mMsgList.clear();
                 mMessageListAdapter.updateData(mMsgList);
+                break;
             case R.id.bt_send:
                 sendMessage(spinner.getSelectedItem().toString()+"\r\n");
                 addMsgList("SEND : ", spinner.getSelectedItem().toString()+"\r\n", Color.GREEN);
@@ -156,9 +160,6 @@ public class NettyActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "发送失败3", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-//        finally {
-//            connectClient.getNioEventLoopGroup().shutdownGracefully();
-//        }
     }
 
     public void addMsgList(String type, String message, int color){

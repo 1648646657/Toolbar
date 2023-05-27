@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CalendarView">
+        <attr name="calendar_square_width" format="dimension|reference" /><!--日历方格宽度-->
+
+        <attr name="title_background" format="color|reference" /><!--标题背景色-->
+        <attr name="title_text_color" format="color|reference" /><!--标题文本颜色-->
+        <attr name="title_text_size" format="dimension|reference" /><!--标题字体大小-->
+
+        <attr name="week_background" format="color|reference" /><!--星期栏背景色-->
+        <attr name="week_text_color" format="color|reference" /><!--星期栏文本颜色-->
+
+        <attr name="selected_background_color" format="color|reference" /><!--选中的背景主题颜色-->
+        <attr name="selected_text_color" format="color|reference" /><!--选中的字体颜色-->
+        <attr name="day_text_color" format="color|reference" /><!--月份日期字体颜色-->
+        <attr name="cur_day_text_color" format="color|reference" /><!--当前月份日期字体颜色-->
+        <attr name="other_day_text_color" format="color|reference" /><!--其他月份日期字体颜色-->
+    </declare-styleable>
+
+</resources>

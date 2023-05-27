@@ -1,4 +1,4 @@
-package com.lzx.test.netty;
+package com.lzx.test.netty.client;
 
 import android.os.Message;
 
@@ -6,20 +6,18 @@ import androidx.annotation.NonNull;
 
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.lzx.test.netty.client.ConnectClient;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -95,7 +93,7 @@ public class TcpClient {
 //            buf.readBytes(bytes);
 //            String message = new String(bytes, "UTF-8");
 //            Log.d("lzx", "message: 客户端接收 :"+message);
-//            sendMsg(0,msg);
+            sendMsg(0,msg);
 
         }
 

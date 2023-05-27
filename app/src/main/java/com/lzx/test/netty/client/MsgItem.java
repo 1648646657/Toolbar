@@ -1,4 +1,4 @@
-package com.lzx.test.netty;
+package com.lzx.test.netty.client;
 
 public class MsgItem {
     String date;

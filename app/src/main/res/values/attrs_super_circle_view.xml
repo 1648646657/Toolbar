@@ -16,6 +16,8 @@
         <attr name="maxValue" format="integer"/>
         <attr name="value" format="integer"/>
         <attr name="ring_radius" format="float"/>
-
     </declare-styleable>
+
+
+
 </resources>
