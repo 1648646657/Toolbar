@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
 import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +42,6 @@ public class TcpConnectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tcp_connect);
-
         mEditText = findViewById(R.id.edit_text);
         mClientSendBtn = findViewById(R.id.client_send_btn);
         mServerSendBtn = findViewById(R.id.server_send_btn);
@@ -78,12 +79,12 @@ public class TcpConnectActivity extends AppCompatActivity {
         mClientSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true){
+                if (true) {
 //                    if(mClientThread != null){
-                    if(false){
+                    if (false) {
                         mClientThread.stoped();
                         //客户端断开后服务端需重新连接
-                        if(mServerThread != null){
+                        if (mServerThread != null) {
                             mServerThread.stoped();
                             mServerThread = new TcpServerThread(false, true, mEditText.getText().toString(), mHandler);
                             mServerThread.start();
@@ -91,18 +92,22 @@ public class TcpConnectActivity extends AppCompatActivity {
                         mClientThread = new TcpClientThread(true, false, address, port, mEditText.getText().toString(), mHandler);
                         mClientThread.start();
                         Log.d("lzx", "onClick: if");
-                    }else {
-                        if(mClientThread != null){
+                    } else {
+                        if (mClientThread != null) {
                             mClientThread.stoped();
                             mClientThread = new TcpClientThread(true, false,
                                     address, port, oneToOne, mHandler);
                             mClientThread.start();
-                        }else {
+                        } else {
                             mClientThread = new TcpClientThread(true, false,
                                     address, port, oneToOne, mHandler);
                             mClientThread.start();
                         }
-                        Toast.makeText(TcpConnectActivity.this,"发送1切1",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TcpConnectActivity.this, "发送1切1", Toast.LENGTH_SHORT).show();
+                    }
+                    if (isOpen) {
+                        mClientThread = new TcpClientThread(true, false, address, port, mEditText.getText().toString(), mHandler);
+                        mClientThread.start();
                     }
                 }
             }
@@ -151,6 +156,15 @@ public class TcpConnectActivity extends AppCompatActivity {
 ////                    Log.d("lzx", "mServerSendBtn.onClick: mClientThread == null");
 //                    mServerThread = new TcpServerThread(true, false, mEditText.getText().toString(), mHandler);
 //                    mServerThread.start();
+                if(isOpen){
+//                    if(mClientThread == null){
+//                        mClientThread = new TcpClientThread(false, true, address, port, mEditText.getText().toString(), mHandler);
+//                        mClientThread.start();
+//                        Log.d("lzx", "mServerSendBtn.onClick: mClientThread == null");
+//                    }
+//                    mServerThread = new TcpServerThread(true, true, mEditText.getText().toString(), mHandler);
+//                    mServerThread.start();
+                }
             }
         });
         mOpenBtn.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +178,8 @@ public class TcpConnectActivity extends AppCompatActivity {
                     }
 //                    mClientThread = new TcpClientThread(false, true, address, port, mEditText.getText().toString(), mHandler);
 //                    mClientThread.start();
+                    mServerThread = new TcpServerThread(false, true, mEditText.getText().toString(), mHandler);
+                    mServerThread.start();
                     Toast.makeText(TcpConnectActivity.this,"已开启服务",Toast.LENGTH_SHORT).show();
 //                    TcpClientThread mClientThread = new TcpClientThread(false, address, port, mEditText.getText().toString(), mHandler);
 //                    mClientThread.start();
@@ -191,22 +207,28 @@ public class TcpConnectActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        mServerThread = new TcpServerThread(false);
-//        mServerThread.start();
-//        if(mServerThread == null){
-//            mServerThread = new TcpServerThread(false, mEditText.getText().toString(), mHandler);
-//            mServerThread.start();
+//    private Handler mHandler = new Handler(Looper.myLooper()) {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case 0:
+//                    String mClientcontent= (String) msg.obj;
+//                    mClientTextView.setText(mClientcontent);
+//                    break;
+//                case 1:
+//                    String mServerContent= (String) msg.obj;
+//                    mServerTextView.setText(mServerContent);
+//                    break;
+//
+//            }
 //        }
-    }
+//    };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         isOpen = false;
-//        mServerThread.isOpen = false;
         if(mServerThread != null){
 //            mServerThread.interrupt();
             mServerThread.stoped();
@@ -215,6 +237,7 @@ public class TcpConnectActivity extends AppCompatActivity {
         if(mClientThread != null){
 //            mClientThread.interrupt();
             mClientThread.stoped();
+
         }
     }
 
