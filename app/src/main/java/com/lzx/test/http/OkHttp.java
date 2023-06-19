@@ -43,7 +43,7 @@ public class OkHttp {
     public static void putOkHttpRequest(MediaType mediaType, String address, String localPath,
                                         okhttp3.Callback callback) throws IOException {
         File file = new File(localPath);
-        if(file == null){
+        if(!file.exists()){
             return;
         }
         RequestBody requestBody = RequestBody.create(file,mediaType);

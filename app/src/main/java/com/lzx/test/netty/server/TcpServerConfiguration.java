@@ -8,7 +8,6 @@ package com.lzx.test.netty.server;
 public class TcpServerConfiguration {
 
     public int port;
-    public int maxFrameLength;
 
     public TcpServerConfiguration(int port) {
         this.port = port;

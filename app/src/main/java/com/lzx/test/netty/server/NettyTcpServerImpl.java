@@ -4,6 +4,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -18,6 +23,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 
 /**
  * @author: lzx
@@ -26,8 +33,9 @@ import io.netty.handler.codec.string.StringEncoder;
  */
 public class NettyTcpServerImpl implements ITcpServer {
 
-    private static final int DEFAULT_MAX_FRAME_LENGTH = 10 * 1024; //消息帧大小 1M
+    private static final String TAG = "NettyTcpServerImpl";
 
+    //自身通道
     private Channel mChannel;
 
     private final EventLoopGroup bossGroup;
@@ -39,6 +47,7 @@ public class NettyTcpServerImpl implements ITcpServer {
     private final int port;
 
     private TcpServerCallback mCallback;
+
 
     public NettyTcpServerImpl(TcpServerConfiguration configuration) {
 
@@ -53,8 +62,6 @@ public class NettyTcpServerImpl implements ITcpServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(@NonNull SocketChannel ch) throws Exception {
-//                        ch.pipeline().addLast(new LineBasedFrameDecoder(configuration.maxFrameLength > 0 ?
-//                                configuration.maxFrameLength : DEFAULT_MAX_FRAME_LENGTH));
                         ch.pipeline().addLast(new StringEncoder());
                         ch.pipeline().addLast(new StringDecoder());
                         ch.pipeline().addLast(new ServiceHandler());
@@ -72,11 +79,12 @@ public class NettyTcpServerImpl implements ITcpServer {
     public ChannelFuture open() {
         if (this.mChannel == null) {
             return mServerBootstrap.bind(port).addListener((ChannelFutureListener) future -> {
-                if (future.isSuccess()) {
-                    mChannel = future.channel();
-                } else {
-                    mChannel.close().sync();
+                if (!future.isSuccess()) {
+                    Log.e(TAG, "TCP打开失败!");
+                    return;
                 }
+                mChannel = future.channel();
+                Log.d(TAG, "TCP打开成功!");
             });
         }
         return null;
@@ -88,17 +96,25 @@ public class NettyTcpServerImpl implements ITcpServer {
             mChannel.close().syncUninterruptibly();
             mChannel = null;
         }
-
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
     }
 
     @Override
-    public ChannelFuture sendMessage(Object message) {
-        if (mChannel != null) {
-            return mChannel.writeAndFlush(message);
+    public void sendMessage(Channel channel, Object message) {
+        TcpServerChannelGroup.sendMessage(channel, message);
+    }
+
+    @Override
+    public void sendMessageToAll(Object message) {
+        TcpServerChannelGroup.sendMessageToAll(message);
+    }
+
+    private void disconnect(Channel channel){
+        boolean isSucceed = TcpServerChannelGroup.disconnect(channel);
+        if(isSucceed){
+            Log.d(TAG, "关闭连接成功：["+channel.remoteAddress()+"]");
         }
-        return null;
     }
 
     @Override
@@ -111,17 +127,26 @@ public class NettyTcpServerImpl implements ITcpServer {
         @Override
         public void channelActive(@NonNull ChannelHandlerContext ctx) throws Exception {
             super.channelActive(ctx);
-            Log.d("lzx1", "channelActive: 远端地址[" + ctx.channel().remoteAddress() + "] 本地地址+[" + ctx.channel().localAddress() + "]");
+            Log.d(TAG, "channelActive: 远端地址[" + ctx.channel().remoteAddress() + "] 本地地址+[" + ctx.channel().localAddress() + "]");
             ctx.channel().writeAndFlush("connect success!!!");
             if (mCallback != null) {
                 mCallback.onChannelActive(ctx.channel());
             }
+            //添加管道到ChanelGroup
+            TcpServerChannelGroup.add(ctx.channel());
+            Log.d(TAG, "已连接客户端数量: "+TcpServerChannelGroup.size());
+            Iterator<Channel> channelGroup = TcpServerChannelGroup.getChannelGroup();
+            while (channelGroup.hasNext()) {
+                Channel channel = channelGroup.next();
+                Log.d(TAG, "已连接客户端: " + channel.remoteAddress().toString());
+            }
+
         }
 
         @Override
         public void channelRead(@NonNull ChannelHandlerContext ctx, @NonNull Object msg) throws Exception {
             super.channelRead(ctx, msg);
-            Log.d("lzx1", "channelRead: ");
+            Log.d(TAG, "channelRead: ");
             if (mCallback != null) {
                 mCallback.onChannelRead(ctx.channel(),msg);
             }
@@ -130,27 +155,36 @@ public class NettyTcpServerImpl implements ITcpServer {
         @Override
         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
             super.channelReadComplete(ctx);
-            Log.d("lzx1", "channelReadComplete: ");
-            if (mCallback != null) {
-                mCallback.onChannelReadComplete(ctx.channel());
-            }
+            Log.d(TAG, "channelReadComplete: ");
         }
 
         @Override
         public void channelInactive(@NonNull ChannelHandlerContext ctx) throws Exception {
             super.channelInactive(ctx);
-            Log.d("lzx1", "channelInactive: 远端地址[" + ctx.channel().remoteAddress() + "] 本地地址+[" + ctx.channel().localAddress() + "]");
+            Log.d(TAG, "channelInactive: 远端地址[" + ctx.channel().remoteAddress() + "] 本地地址+[" + ctx.channel().localAddress() + "]");
             if (mCallback != null) {
                 mCallback.onChannelInactive(ctx.channel());
             }
+            disconnect(ctx.channel());
         }
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
             super.exceptionCaught(ctx, cause);
-            Log.d("lzx1", "exceptionCaught: ");
+            Log.d(TAG, "exceptionCaught: ");
             if (mCallback != null) {
                 mCallback.onError(ctx.channel(), cause == null ? new RuntimeException("exceptionCaught cause is null") : cause);
+            }
+            disconnect(ctx.channel());
+        }
+        @Override
+        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+            super.userEventTriggered(ctx, evt);
+            if (evt instanceof IdleStateEvent) {
+                IdleStateEvent event = (IdleStateEvent) evt;
+                if (event.state() == IdleState.ALL_IDLE) {
+                    disconnect(ctx.channel());
+                }
             }
         }
 

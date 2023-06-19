@@ -60,5 +60,7 @@ dependencies {
     implementation 'com.haibin:calendarview:3.7.1'
     //https://github.com/li-xiaojun/XPopup
     implementation 'com.github.li-xiaojun:XPopup:2.9.19'
+    //https://github.com/greenrobot/EventBus
+    implementation("org.greenrobot:eventbus:3.3.1")
 
 }

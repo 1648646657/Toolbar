@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     private DrawerLayout mDrawerLayout;
     private TextView responseText;
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("lzx", "onCreate: <Build.VERSION_CODES.LOLLIPOP");
             }
         }
+
 ////        lzx
 //        int flags = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 //                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -116,7 +120,71 @@ public class MainActivity extends AppCompatActivity {
         listenIntent = new Intent(this, ActivityListenSevice.class);
 //        startService(listenIntent);
 
+        toARGB();
     }
+
+    public void toARGB() {
+        System.out.println("透明度 | 十六进制");
+        System.out.println("---- | ----");
+        for (double i = 1; i >= 0; i -= 0.01) {
+            i = Math.round(i * 100) / 100.0d;
+            int alpha = (int) Math.round(i * 255);
+            String hex = Integer.toHexString(alpha).toUpperCase();
+            if (hex.length() == 1) {
+                hex = "0" + hex;
+            }
+            int percent = (int) (i * 100);
+            Log.d("TAG", "toARGB: "+percent+"---"+hex+"---"+alpha+"---"+i);
+        }
+    }
+
+    public static String rgbAlphaToHex(int red, int green, int blue, String alpha){
+        int alphaInt = Integer.parseInt(alpha);
+        String hex = Integer.toHexString(alphaInt).toUpperCase();
+        if (hex.length() == 1) {
+            hex = "0" + hex;
+        }
+        String hr = Integer.toHexString(red);
+        String hg = Integer.toHexString(green);
+        String hb = Integer.toHexString(blue);
+        Log.d(TAG, "rgbAlphaToHex: #"+hex+hr+hg+hb);
+        return "#"+hex+hr+hg+hb;
+    }
+    public boolean isHuawei() {
+        if (Build.BRAND == null) {
+            return false;
+        } else {
+            return Build.BRAND.toLowerCase().equals("huawei") || Build.BRAND.toLowerCase().equals("honor");
+        }
+    }
+
+    /**
+     * 跳转到指定应用的指定页面
+     */
+    private void showActivity(@NonNull String packageName, @NonNull String activityDir) {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(packageName, activityDir));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    /**
+     * 跳转到指定应用的首页
+     */
+    private void showActivity(@NonNull String packageName) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        startActivity(intent);
+    }
+
+    private void goHuaweiSetting() {
+        try {
+            showActivity("com.huawei.systemmanager",
+                    "com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity");
+        } catch (Exception e) {
+            showActivity("com.huawei.systemmanager");
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -161,12 +229,17 @@ public class MainActivity extends AppCompatActivity {
 //                Intent intent=new Intent(this, CameraActivity.class);
 //                startActivity(intent);
 //                overridePendingTransition(R.anim.scale,0);
-                Intent intent=new Intent(this, CalendarActivity.class);
+                Intent intent=new Intent(this, AppTest.class);
                 startActivity(intent);
+
+//                if(isHuawei()){
+//                    goHuaweiSetting();
+//                }
+
                 Toast.makeText(this,"Clicked Backup",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete:
-                Intent intent1=new Intent(this, AppTest.class);
+                Intent intent1=new Intent(this, TcpServerActivity.class);
                 startActivity(intent1);
                 Toast.makeText(this,"Clicked Delete",Toast.LENGTH_SHORT).show();
                 break;
@@ -177,8 +250,10 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                        responseData= response.body().string();
-                        showResponse(responseData);
+                        if(response.body() != null){
+                            responseData= response.body().string();
+                            showResponse(responseData);
+                        }
                     }
                     @Override
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {

@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--后台应用弹窗权限-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!--前台服务权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission
         android:name="android.permission.CAMERA"
         tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" /> <!-- activityListen -->
@@ -108,6 +112,7 @@
             android:name=".ActivityListenSevice"
             android:enabled="true"
             android:exported="true" />
+        <service android:name=".service.FrontDeskService"/>
     </application>
 
 </manifest>
